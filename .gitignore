@@ -37,3 +37,6 @@ Thumbs.db
 *.orig
 *.tmp
 tests/.build.cjs
+
+# Local deploy helper (not part of the public repo)
+push_to_github.command
