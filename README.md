@@ -121,7 +121,7 @@ The interface follows the patterns that work in Indian consumer-finance apps. Th
 
 - AsyncStorage persistence so an assessment survives an app restart.
 - Live SBI TT rate fetch in place of the static lookup table.
-- Marginal relief modelling for the surcharge and the 87A rebate.
+- Marginal relief on the surcharge (the new-regime 87A marginal relief and the old-regime 87A rebate are now implemented).
 - PDF export of the risk report.
 
 ## License

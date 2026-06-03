@@ -4,10 +4,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors, typography, spacing, radius, card } from '../../theme';
 import Accordion from '../../components/Accordion';
 import {
-  calcFinalTax, NEW_REGIME_SLABS, OLD_REGIME_SLABS,
+  calcNewRegimeTax, calcOldRegimeTax,
   STANDARD_DEDUCTION_NEW, STANDARD_DEDUCTION_OLD,
   DEDUCTION_80C_LIMIT, DEDUCTION_80D_SELF, NPS_80CCD1B,
-  applyNewRegimeRebate,
 } from '../../logic/taxRates';
 
 export default function RegimeComparatorScreen() {
@@ -31,20 +30,20 @@ export default function RegimeComparatorScreen() {
     const oldTaxableIncome = Math.max(0,
       gross - STANDARD_DEDUCTION_OLD - d80C - d80D - nps - hraExempt - Math.min(homeLoan, 200000)
     );
-    const oldTax = calcFinalTax(oldTaxableIncome, OLD_REGIME_SLABS, 'old');
+    const oldTax = calcOldRegimeTax(oldTaxableIncome);
 
     const newTaxableIncome = Math.max(0, gross - STANDARD_DEDUCTION_NEW);
-    const newTaxBase = calcFinalTax(newTaxableIncome, NEW_REGIME_SLABS, 'new');
-    const newTaxAfterRebate = applyNewRegimeRebate(newTaxableIncome, newTaxBase.total);
-    const newTax = { ...newTaxBase, total: newTaxAfterRebate };
+    const newTax = calcNewRegimeTax(newTaxableIncome);
 
     const saving = oldTax.total - newTax.total;
+    const recommendedTotal = saving > 0 ? newTax.total : oldTax.total;
     setResult({
       gross,
       oldRegime: { taxableIncome: oldTaxableIncome, ...oldTax },
       newRegime: { taxableIncome: newTaxableIncome, ...newTax },
       saving,
       recommendation: saving > 0 ? 'new' : 'old',
+      effectiveRate: gross > 0 ? (recommendedTotal / gross) * 100 : 0,
       deductionsUsed: { d80C, d80D, nps, hraExempt, homeLoan: Math.min(homeLoan, 200000) },
     });
     setOpen(null);
@@ -106,6 +105,7 @@ export default function RegimeComparatorScreen() {
                 {result.recommendation === 'new' ? 'New Regime' : 'Old Regime'}
               </Text>
               <Text style={styles.recSaving}>Saves INR {Math.abs(result.saving).toLocaleString()} vs the other option</Text>
+              <Text style={styles.recEff}>Effective tax rate: {result.effectiveRate.toFixed(1)}% of gross</Text>
             </View>
 
             <View style={styles.compRow}>
@@ -174,6 +174,7 @@ const styles = StyleSheet.create({
   recLabel: { ...typography.label, marginBottom: spacing.sm },
   recValue: { fontSize: 28, fontWeight: '800', marginBottom: spacing.sm },
   recSaving: { ...typography.small },
+  recEff: { ...typography.small, color: colors.accent, marginTop: spacing.xs },
   compRow: { flexDirection: 'row', gap: spacing.sm, marginBottom: spacing.md },
   compCard: { flex: 1, ...card, gap: spacing.xs },
   compCardWinner: { borderColor: colors.accent },

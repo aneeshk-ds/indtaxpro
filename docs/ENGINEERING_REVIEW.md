@@ -48,7 +48,7 @@ Eight issues were found. Five are tax-rule accuracy issues and three are code-le
 | F3 | DTAA dividend | Medium | Treaty dividend cap set to 15% for all users | Fixed |
 | F4 | Holding period | Medium | Whole-month counting misclassifies near-boundary holds | Fixed |
 | F5 | Forex date parsing | Low | `new Date("YYYY-MM-DD")` can pick the wrong month in some timezones | Fixed |
-| F6 | 87A rebate | Low | No marginal relief near the 12L cap (tax cliff) | Documented |
+| F6 | 87A rebate | Low | No marginal relief near the 12L cap (tax cliff); old-regime rebate missing | Fixed |
 | F7 | Form 67 timing | Low | "Must be before the ITR" is stricter than current rule | Documented |
 | F8 | Black Money Act penalty | Low | Flat 10L applied to any omission, including small accounts | Documented |
 
@@ -82,7 +82,7 @@ The treaty cap was set to 15%. Under India-US DTAA Article 10(2), 15% applies on
 
 ### F6 to F8 (Documented, not changed)
 
-- F6: The 87A rebate zeroes tax up to 12,00,000 taxable income, then returns full tax above it, producing a cliff. The real ITR applies marginal relief so the amount payable just above 12L is small. Modelling marginal relief is a known next step.
+- F6 (now fixed): The new-regime 87A rebate now applies marginal relief just above 12,00,000, so tax cannot exceed the income earned over 12L (a person at 12.10L pays about 10,400, not 66,300). The old-regime 87A rebate was also added, so taxable income up to 5,00,000 is nil in the old regime. Implemented as calcNewRegimeTax and calcOldRegimeTax in taxRates.js and covered by the test suite.
 - F7: Since the 2022 amendment to Rule 128 ([CBDT Notification 100/2022](https://www.taxmann.com/post/blog/cbdt-extends-time-limit-for-furnishing-of-form-67-ftc/)), Form 67 can be filed up to the end of the assessment year, not strictly before the ITR. The app's "filed after ITR" warning is conservative rather than wrong, and is left as a prompt to file early.
 - F8: Since 1 October 2024, foreign movable assets under 20 lakh aggregate are exempt from the Black Money Act penalty ([Finance Act 2024 amendment](https://taxguru.in/income-tax/cbdt-amends-black-money-act-rs-20-lakh-asset-exemption.html)). The app still surfaces the 10 lakh flat figure for any omission, which over-states exposure for small accounts.
 

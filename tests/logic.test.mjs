@@ -1,5 +1,5 @@
 // Verifies the corrected behaviour after the high-impact fixes.
-import { calcFinalTax, NEW_REGIME_SLABS, OLD_REGIME_SLABS, DTAA_USA }
+import { calcFinalTax, calcNewRegimeTax, calcOldRegimeTax, NEW_REGIME_SLABS, OLD_REGIME_SLABS, DTAA_USA }
   from '../src/logic/taxRates.js';
 import { calculateRSUTax } from '../src/logic/rsuCalculator.js';
 import { checkDTAA } from '../src/logic/dtaaChecker.js';
@@ -60,6 +60,16 @@ eq('30% withholding exceeds 25% treaty cap -> flagged', dtaa30.issues.some(i=>i.
 hdr('FIX (forex): date parsed by components at month boundary');
 eq("'2025-03-01' uses preceding month 2025-02", getSBIRateForDate('2025-03-01').rateMonth, '2025-02');
 eq("'2025-03-01' rate = 87.12", getSBIRateForDate('2025-03-01').rate, 87.12);
+
+hdr('Indian regime: 87A rebate + marginal relief (normal-worker cases)');
+eq('new regime 12,00,000 taxable -> 0 (full rebate)', calcNewRegimeTax(1200000).total, 0);
+eq('new regime 12,10,000 -> 10,400 (marginal relief, not 66k)', calcNewRegimeTax(1210000).total, 10400);
+eq('new regime 12,10,000 marginalRelief flag', calcNewRegimeTax(1210000).marginalRelief, true);
+eq('new regime 16,00,000 -> 1,24,800 (no relief)', calcNewRegimeTax(1600000).total, 124800);
+eq('new regime 16,00,000 marginalRelief false', calcNewRegimeTax(1600000).marginalRelief, false);
+eq('old regime 5,00,000 taxable -> 0 (87A rebate)', calcOldRegimeTax(500000).total, 0);
+eq('old regime 5,00,000 rebateApplied', calcOldRegimeTax(500000).rebateApplied, true);
+eq('old regime 6,00,000 -> 33,800', calcOldRegimeTax(600000).total, 33800);
 
 console.log(`\n========================================`);
 console.log(`AFTER-FIX RESULT: ${pass} passed, ${fail} failed`);

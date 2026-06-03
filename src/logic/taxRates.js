@@ -141,11 +141,46 @@ export function calcFinalTax(income, slabs, regime = 'old') {
 }
 
 /**
- * New Regime 87A rebate - FY2025-26
- * Full rebate (up to INR 60,000) if taxable income <= INR 12L
- * Result: effective zero tax for income up to 12L
+ * New Regime 87A rebate - FY2025-26, with marginal relief.
+ * Full rebate up to INR 12L taxable income. Just above 12L, marginal relief caps the
+ * tax at the amount by which income exceeds 12L (so a small jump over 12L is not taxed
+ * far more than the extra rupees earned).
+ * @param {number} income  taxable income
+ * @param {number} tax      tax BEFORE cess (base + surcharge)
  */
 export function applyNewRegimeRebate(income, tax) {
   if (income <= 1200000) return 0;
-  return tax;
+  return Math.min(tax, income - 1200000);
+}
+
+/**
+ * Full new-regime tax: slab + surcharge (capped at 25%) + 87A rebate with marginal
+ * relief + 4% cess. Returns the breakdown the UI shows.
+ */
+export function calcNewRegimeTax(taxableIncome) {
+  const base = calcSlabTax(taxableIncome, NEW_REGIME_SLABS);
+  const surcharge = calcSurcharge(taxableIncome, base, 'new');
+  const taxBeforeCess = applyNewRegimeRebate(taxableIncome, base + surcharge);
+  const cess = Math.round(taxBeforeCess * CESS_RATE);
+  return {
+    base,
+    surcharge,
+    cess,
+    total: Math.round(taxBeforeCess) + cess,
+    rebateApplied: taxableIncome <= 1200000,
+    marginalRelief: taxableIncome > 1200000 && (base + surcharge) > (taxableIncome - 1200000),
+  };
+}
+
+/**
+ * Full old-regime tax: slab + 87A rebate (taxable income up to INR 5L pays nil, rebate
+ * up to INR 12,500) + surcharge + 4% cess.
+ */
+export function calcOldRegimeTax(taxableIncome) {
+  const slab = calcSlabTax(taxableIncome, OLD_REGIME_SLABS);
+  const rebate = taxableIncome <= 500000 ? Math.min(12500, slab) : 0;
+  const base = slab - rebate;
+  const surcharge = calcSurcharge(taxableIncome, base, 'old');
+  const cess = Math.round((base + surcharge) * CESS_RATE);
+  return { base, surcharge, cess, total: base + surcharge + cess, rebateApplied: rebate > 0 };
 }
