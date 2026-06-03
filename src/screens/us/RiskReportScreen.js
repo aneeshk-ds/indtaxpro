@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import {
-  View, Text, TouchableOpacity, StyleSheet,
-  ScrollView, SafeAreaView,
-} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors, typography, spacing, radius, card } from '../../theme';
 import RiskBadge from '../../components/RiskBadge';
 import ChecklistItem from '../../components/ChecklistItem';
 import { computeRiskScore } from '../../logic/riskScorer';
+import { getRSUResult } from '../../state/rsuStore';
 
 const RISK_SCORE_COLORS = {
   low: colors.accent,
@@ -17,13 +16,14 @@ const RISK_SCORE_COLORS = {
 
 export default function RiskReportScreen({ route, navigation }) {
   const { incomeData, scheduleFAResult, dtaaResult } = route.params || {};
+  const rsuResult = getRSUResult();
   const [report, setReport] = useState(null);
 
   useEffect(() => {
     const score = computeRiskScore({
       scheduleFA: scheduleFAResult,
       dtaa: dtaaResult,
-      rsu: null,
+      rsu: rsuResult,
     });
     setReport(score);
   }, []);
@@ -116,6 +116,30 @@ export default function RiskReportScreen({ route, navigation }) {
                 </Text>
               </View>
             )}
+          </View>
+        )}
+
+        {/* RSU / ESPP summary */}
+        {rsuResult && (
+          <View style={styles.moduleCard}>
+            <View style={styles.moduleHeader}>
+              <Text style={styles.moduleTitle}>RSU / ESPP</Text>
+            </View>
+            <View style={styles.ftcInline}>
+              <Text style={styles.ftcInlineLabel}>Perquisite (salary)</Text>
+              <Text style={styles.ftcInlineValue}>
+                INR {rsuResult.summary.totalPerquisiteINR.toLocaleString()}
+              </Text>
+            </View>
+            <View style={styles.ftcInline}>
+              <Text style={styles.ftcInlineLabel}>Long-term CG tax</Text>
+              <Text style={styles.ftcInlineValue}>
+                INR {rsuResult.summary.totalCGTax.toLocaleString()}
+              </Text>
+            </View>
+            {rsuResult.issues.map((iss, i) => (
+              <Text key={i} style={styles.rsuFlag}>{iss.title}</Text>
+            ))}
           </View>
         )}
 
@@ -226,6 +250,7 @@ const styles = StyleSheet.create({
   ftcInlineLabel: { ...typography.label },
   ftcInlineValue: { ...typography.accent, fontSize: 18, fontWeight: '700' },
   infoBox: { ...card, marginBottom: spacing.md, borderColor: colors.accent + '30' },
+  rsuFlag: { ...typography.small, color: colors.warning, marginTop: spacing.sm },
   infoTitle: { ...typography.label, color: colors.accent, marginBottom: spacing.sm },
   infoText: { ...typography.small, lineHeight: 20 },
   caCard: {

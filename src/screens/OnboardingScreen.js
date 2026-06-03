@@ -1,7 +1,6 @@
 import React from 'react';
-import {
-  View, Text, TouchableOpacity, StyleSheet, SafeAreaView,
-} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors, typography, spacing, radius } from '../theme';
 
 export default function OnboardingScreen({ navigation }) {

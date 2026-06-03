@@ -6,7 +6,7 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "test": "npx --yes esbuild tests/logic.test.mjs --bundle --platform=node --outfile=tests/.build.cjs && node tests/.build.cjs"
+    "test": "npx --yes esbuild tests/logic.test.mjs --bundle --platform=node --outfile=tests/.build.cjs && node tests/.build.cjs && npx --yes esbuild tests/rsu_integration.test.mjs --bundle --platform=node --outfile=tests/.build.cjs && node tests/.build.cjs"
   },
   "dependencies": {
     "@react-navigation/native": "^7.0.14",

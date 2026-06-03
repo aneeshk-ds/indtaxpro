@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import {
-  View, Text, TextInput, TouchableOpacity, StyleSheet,
-  ScrollView, SafeAreaView,
-} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors, typography, spacing, radius, card } from '../../theme';
 import ChecklistItem from '../../components/ChecklistItem';
 import { calculateRSUTax } from '../../logic/rsuCalculator';
 import { getSBIRateForDate } from '../../logic/sbiRates';
+import { setRSUResult } from '../../state/rsuStore';
 
 const EMPTY_LOT = {
   id: Date.now().toString(),
@@ -54,7 +53,9 @@ export default function RSUScreen({ route, navigation }) {
       });
 
     if (processed.length > 0) {
-      setResult(calculateRSUTax(processed));
+      const computed = calculateRSUTax(processed);
+      setResult(computed);
+      setRSUResult(computed);
     }
   };
 

@@ -119,7 +119,6 @@ The interface follows the patterns that work in Indian consumer-finance apps. Th
 
 ## Roadmap
 
-- Wire the RSU calculator output into the composite risk score.
 - AsyncStorage persistence so an assessment survives an app restart.
 - Live SBI TT rate fetch in place of the static lookup table.
 - Marginal relief modelling for the surcharge and the 87A rebate.
