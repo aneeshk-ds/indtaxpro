@@ -8,6 +8,8 @@ A mobile tax-filing assistant for Indian residents who hold US income: RSUs, ESP
 ![On-device](https://img.shields.io/badge/data-100%25%20on--device-00b37e)
 ![License](https://img.shields.io/badge/license-MIT-999)
 
+**Live web demo:** https://aneeshk-ds.github.io/indtaxpro/ (the same React Native code, exported to the web with Expo and deployed to GitHub Pages by a CI workflow)
+
 ![Assessment pipeline](docs/diagrams/cross_border_flow.svg)
 
 ---
@@ -32,6 +34,8 @@ Mainstream filing tools assume domestic income and skip most of this. IndTaxPro 
 - SBI TT rate lookup that applies the preceding-month rule automatically and flags any rate more than 1% off the official figure.
 - Standard flow as well: an ITR-form selector and an Old vs New regime comparator for FY 2025-26.
 - Composite risk score from 0 to 100 with a ranked action list and a ready-to-file gate.
+
+The interface is organised into a bottom tab bar (US Filing, Indian Tax, Learn) with each long screen split into collapsible accordion sections, so a user sees one focused step at a time rather than one long scroll.
 
 All computation runs on the device. There is no backend, no account, and no network call.
 

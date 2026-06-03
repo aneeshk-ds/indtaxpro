@@ -11,6 +11,13 @@
     },
     "android": {
       "package": "com.indtaxpro.app"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    },
+    "experiments": {
+      "baseUrl": "/indtaxpro"
     }
   }
 }

@@ -145,7 +145,7 @@ export default function RiskReportScreen({ route, navigation }) {
       <View style={styles.footer}>
         <TouchableOpacity
           style={styles.btn}
-          onPress={() => navigation.navigate('Onboarding')}
+          onPress={() => navigation.navigate('IncomeInput')}
         >
           <Text style={styles.btnText}>Start new assessment</Text>
         </TouchableOpacity>

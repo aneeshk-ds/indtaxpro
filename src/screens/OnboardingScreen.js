@@ -18,7 +18,7 @@ export default function OnboardingScreen({ navigation }) {
         <View style={styles.cards}>
           <TouchableOpacity
             style={[styles.card, styles.cardPrimary]}
-            onPress={() => navigation.navigate('IncomeInput')}
+            onPress={() => navigation.navigate('Main', { screen: 'USFiling', params: { screen: 'IncomeInput' } })}
             activeOpacity={0.8}
           >
             <Text style={styles.cardIcon}>$</Text>
@@ -33,7 +33,7 @@ export default function OnboardingScreen({ navigation }) {
 
           <TouchableOpacity
             style={styles.card}
-            onPress={() => navigation.navigate('ITRSelector')}
+            onPress={() => navigation.navigate('Main', { screen: 'IndianTax', params: { screen: 'ITRSelector' } })}
             activeOpacity={0.8}
           >
             <Text style={styles.cardIcon}>₹</Text>
