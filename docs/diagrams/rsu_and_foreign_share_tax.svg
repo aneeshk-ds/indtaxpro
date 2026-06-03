@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 720" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="1120" height="720" fill="#07070f"/>
+  <text x="40" y="52" fill="#ffffff" font-size="28" font-weight="700">RSU Taxation: Two Separate Events</text>
+  <text x="40" y="82" fill="#999999" font-size="15">The most common modelling error is treating vesting and sale as one event. They are taxed under different heads.</text>
+
+  <!-- timeline -->
+  <line x1="80" y1="150" x2="1040" y2="150" stroke="#2a2a3e" stroke-width="2"/>
+  <circle cx="200" cy="150" r="7" fill="#999999"/>
+  <circle cx="540" cy="150" r="8" fill="#00e5a0"/>
+  <circle cx="900" cy="150" r="8" fill="#ffb347"/>
+  <text x="200" y="130" fill="#999999" font-size="13" text-anchor="middle">Grant</text>
+  <text x="540" y="130" fill="#00e5a0" font-size="13" text-anchor="middle" font-weight="600">Vest</text>
+  <text x="900" y="130" fill="#ffb347" font-size="13" text-anchor="middle" font-weight="600">Sale</text>
+  <text x="370" y="172" fill="#666" font-size="12" text-anchor="middle">not a taxable event</text>
+
+  <!-- Vest card -->
+  <rect x="120" y="210" width="420" height="210" rx="12" fill="#0f0f1a" stroke="#00e5a0"/>
+  <text x="144" y="244" fill="#00e5a0" font-size="13" font-weight="700" letter-spacing="1">VEST  =  SALARY (PERQUISITE)</text>
+  <text x="144" y="278" fill="#ffffff" font-size="15">Taxed at fair market value on the vest date</text>
+  <text x="144" y="306" fill="#999999" font-size="13">Converted with the SBI TT rate on that date</text>
+  <text x="144" y="332" fill="#999999" font-size="13">Employer TDS should appear in Form 16 Part B</text>
+  <text x="144" y="358" fill="#999999" font-size="13">Reported in the Salary schedule</text>
+  <text x="144" y="392" fill="#00e5a0" font-size="13">Cost basis for a later sale = FMV on vest date</text>
+
+  <!-- Sale card -->
+  <rect x="580" y="210" width="420" height="210" rx="12" fill="#0f0f1a" stroke="#ffb347"/>
+  <text x="604" y="244" fill="#ffb347" font-size="13" font-weight="700" letter-spacing="1">SALE  =  CAPITAL GAINS (SEC 112)</text>
+  <text x="604" y="278" fill="#ffffff" font-size="15">Gain = sale price minus FMV-on-vest basis</text>
+  <text x="604" y="306" fill="#999999" font-size="13">Holding period runs from the VEST date</text>
+  <text x="604" y="332" fill="#999999" font-size="13">Both legs converted at their own SBI TT rate</text>
+  <text x="604" y="358" fill="#999999" font-size="13">Reported in Schedule CG</text>
+  <text x="604" y="392" fill="#ffb347" font-size="13">Foreign shares: Section 112, not 112A / 111A</text>
+
+  <!-- comparison table -->
+  <text x="40" y="478" fill="#ffffff" font-size="20" font-weight="700">Why foreign shares are not Indian listed equity</text>
+
+  <rect x="40" y="500" width="1040" height="180" rx="12" fill="#0f0f1a" stroke="#2a2a3e"/>
+  <line x1="420" y1="500" x2="420" y2="680" stroke="#2a2a3e"/>
+  <line x1="750" y1="500" x2="750" y2="680" stroke="#2a2a3e"/>
+  <line x1="40" y1="540" x2="1080" y2="540" stroke="#2a2a3e"/>
+
+  <text x="64" y="527" fill="#999999" font-size="13" font-weight="600">Attribute</text>
+  <text x="444" y="527" fill="#00e5a0" font-size="13" font-weight="600">Indian listed equity (112A / 111A)</text>
+  <text x="774" y="527" fill="#ffb347" font-size="13" font-weight="600">US shares / RSU / ESPP (112)</text>
+
+  <text x="64" y="572" fill="#cccccc" font-size="13">Long-term holding</text>
+  <text x="444" y="572" fill="#cccccc" font-size="13">more than 12 months</text>
+  <text x="774" y="572" fill="#ffffff" font-size="13">more than 24 months</text>
+
+  <text x="64" y="606" fill="#cccccc" font-size="13">LTCG rate</text>
+  <text x="444" y="606" fill="#cccccc" font-size="13">12.5%</text>
+  <text x="774" y="606" fill="#ffffff" font-size="13">12.5% flat, no indexation</text>
+
+  <text x="64" y="640" fill="#cccccc" font-size="13">LTCG exemption</text>
+  <text x="444" y="640" fill="#cccccc" font-size="13">first 1.25 lakh exempt</text>
+  <text x="774" y="640" fill="#ff4d4d" font-size="13">no exemption</text>
+
+  <text x="64" y="672" fill="#cccccc" font-size="13">Short-term rate</text>
+  <text x="444" y="672" fill="#cccccc" font-size="13">20% flat (111A)</text>
+  <text x="774" y="672" fill="#ff4d4d" font-size="13">added to income, slab rate</text>
+
+  <text x="40" y="708" fill="#666" font-size="12">This distinction is implemented in src/logic/rsuCalculator.js and verified by the test harness in /tests.</text>
+</svg>

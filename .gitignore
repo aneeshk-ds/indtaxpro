@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+
+# Expo / Metro
+.expo/
+.expo-shared/
+dist/
+web-build/
+.metro-health-check*
+
+# Native build output
+ios/
+android/
+
+# Secrets and credentials (none committed; kept as a guard)
+.env
+.env.*
+*.pem
+*.key
+*.keystore
+*.p12
+google-services.json
+GoogleService-Info.plist
+
+# Logs
+*.log
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.orig
+*.tmp
+tests/.build.cjs

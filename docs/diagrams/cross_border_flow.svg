@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 660" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="1120" height="660" fill="#07070f"/>
+  <text x="40" y="52" fill="#ffffff" font-size="28" font-weight="700">US-India Filing Assessment Pipeline</text>
+  <text x="40" y="82" fill="#999999" font-size="15">Four guided stages convert a resident's US income into a single, prioritised pre-filing risk report.</text>
+
+  <!-- Stage 1 -->
+  <rect x="40" y="120" width="240" height="300" rx="12" fill="#0f0f1a" stroke="#2a2a3e"/>
+  <text x="60" y="150" fill="#00e5a0" font-size="12" font-weight="700" letter-spacing="1">01  INCOME INPUT</text>
+  <text x="60" y="182" fill="#ffffff" font-size="16" font-weight="600">US income and equity</text>
+  <text x="60" y="214" fill="#999999" font-size="13">Salary / W-2</text>
+  <text x="60" y="240" fill="#999999" font-size="13">Dividends (1099-DIV)</text>
+  <text x="60" y="266" fill="#999999" font-size="13">Withheld tax (1042-S)</text>
+  <text x="60" y="292" fill="#999999" font-size="13">RSU and ESPP toggles</text>
+  <text x="60" y="340" fill="#ffffff" font-size="13" font-weight="600">Forex</text>
+  <text x="60" y="364" fill="#999999" font-size="13">SBI TT buying rate,</text>
+  <text x="60" y="384" fill="#999999" font-size="13">preceding-month rule</text>
+
+  <!-- Stage 2 -->
+  <rect x="320" y="120" width="240" height="300" rx="12" fill="#0f0f1a" stroke="#2a2a3e"/>
+  <text x="340" y="150" fill="#00e5a0" font-size="12" font-weight="700" letter-spacing="1">02  SCHEDULE FA</text>
+  <text x="340" y="182" fill="#ffffff" font-size="16" font-weight="600">Foreign asset report</text>
+  <text x="340" y="214" fill="#ff4d4d" font-size="13">Calendar year, not FY</text>
+  <text x="340" y="240" fill="#ffb347" font-size="13">Peak balance, not closing</text>
+  <text x="340" y="266" fill="#ff4d4d" font-size="13">Signing authority declared</text>
+  <text x="340" y="340" fill="#ffffff" font-size="13" font-weight="600">Exposure</text>
+  <text x="340" y="364" fill="#999999" font-size="13">Black Money Act penalty</text>
+  <text x="340" y="384" fill="#999999" font-size="13">flagged on omission</text>
+
+  <!-- Stage 3 -->
+  <rect x="600" y="120" width="240" height="300" rx="12" fill="#0f0f1a" stroke="#2a2a3e"/>
+  <text x="620" y="150" fill="#00e5a0" font-size="12" font-weight="700" letter-spacing="1">03  DTAA / FORM 67</text>
+  <text x="620" y="182" fill="#ffffff" font-size="16" font-weight="600">Foreign tax credit</text>
+  <text x="620" y="214" fill="#999999" font-size="13">Form 67 filed and timed</text>
+  <text x="620" y="240" fill="#999999" font-size="13">Withholding within treaty</text>
+  <text x="620" y="266" fill="#999999" font-size="13">SBI TT rate source check</text>
+  <text x="620" y="292" fill="#999999" font-size="13">CA sign-off above 5L</text>
+  <text x="620" y="340" fill="#ffffff" font-size="13" font-weight="600">Output</text>
+  <text x="620" y="364" fill="#00e5a0" font-size="13">Claimable FTC estimate</text>
+
+  <!-- Stage 4 -->
+  <rect x="880" y="120" width="240" height="300" rx="12" fill="#0f0f1a" stroke="#00e5a0"/>
+  <text x="900" y="150" fill="#00e5a0" font-size="12" font-weight="700" letter-spacing="1">04  RISK REPORT</text>
+  <text x="900" y="182" fill="#ffffff" font-size="16" font-weight="600">Composite score</text>
+  <text x="900" y="214" fill="#999999" font-size="13">0 to 100 risk score</text>
+  <text x="900" y="240" fill="#999999" font-size="13">Penalty exposure in INR</text>
+  <text x="900" y="266" fill="#999999" font-size="13">Top 10 ranked actions</text>
+  <text x="900" y="292" fill="#999999" font-size="13">Ready-to-file gate</text>
+
+  <!-- arrows -->
+  <g fill="#00e5a0">
+    <polygon points="286,270 312,270 312,262 326,274 312,286 312,278 286,278"/>
+    <polygon points="566,270 592,270 592,262 606,274 592,286 592,278 566,278"/>
+    <polygon points="846,270 872,270 872,262 886,274 872,286 872,278 846,278"/>
+  </g>
+
+  <!-- risk band legend -->
+  <text x="40" y="480" fill="#ffffff" font-size="15" font-weight="600">Risk bands</text>
+  <rect x="40" y="498" width="240" height="34" rx="8" fill="#001a0f" stroke="#00e5a0"/>
+  <text x="56" y="520" fill="#00e5a0" font-size="13">Low  0 to 14   Proceed</text>
+  <rect x="296" y="498" width="240" height="34" rx="8" fill="#1a1200" stroke="#ffb347"/>
+  <text x="312" y="520" fill="#ffb347" font-size="13">Medium  15 to 34   Review</text>
+  <rect x="552" y="498" width="240" height="34" rx="8" fill="#1a0a00" stroke="#ff8a3d"/>
+  <text x="568" y="520" fill="#ff8a3d" font-size="13">High  35 to 59   Fix first</text>
+  <rect x="808" y="498" width="240" height="34" rx="8" fill="#1a0000" stroke="#ff4d4d"/>
+  <text x="824" y="520" fill="#ff4d4d" font-size="13">Critical  60 plus   Do not file</text>
+
+  <text x="40" y="600" fill="#666" font-size="12">All computation is on-device. No accounts, no backend, no network calls.</text>
+  <text x="40" y="624" fill="#666" font-size="12">Engineering aid for review and education, not a substitute for a chartered accountant.</text>
+</svg>

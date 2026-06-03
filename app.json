@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "IndTaxPro",
+    "slug": "indtaxpro",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.indtaxpro.app"
+    },
+    "android": {
+      "package": "com.indtaxpro.app"
+    }
+  }
+}
